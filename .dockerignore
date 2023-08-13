@@ -1,0 +1,13 @@
+# IDE files
+.idea/
+.vscode/
+
+# Local infra data
+infra/data/
+
+# dotenv files
+.env
+
+# Wordpress
+wp-content/cache/
+wp-content/uploads/

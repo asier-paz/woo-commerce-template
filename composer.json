@@ -1,0 +1,17 @@
+{
+    "name": "asierpaz/woo-commerce-template",
+    "description": "Template project for a Wordpress with Woo Commerce to avoid all the boilerplate when starting an e-commerce",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MySite\\": "src/",
+            "MySite\\Apps\\Wordpress\\": "apps/wordpress/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Asier Paz"
+        }
+    ],
+    "require": {}
+}

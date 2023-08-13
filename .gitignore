@@ -1,0 +1,19 @@
+# IDE files
+.idea/
+.vscode/
+
+# Wordpress
+wp-content/cache/
+wp-content/uploads/
+
+# Ignore infrastructure data directory
+infrastructure/data/
+
+# Ignore composer dependencies
+vendor/
+
+# Node modules
+node_modules/
+
+# dotenv files
+.env
