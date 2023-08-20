@@ -6,6 +6,7 @@
  * @subpackage Administration
  */
 
+require_once __DIR__ . "/../../../vendor/autoload.php";
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';
 
