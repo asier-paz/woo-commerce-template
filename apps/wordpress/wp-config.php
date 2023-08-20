@@ -18,21 +18,23 @@
  * @package WordPress
  */
 
+use maarky\Option\Type\String\Option;
+
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'db_name' );
+define('DB_NAME', Option::create(getenv("MYSQL_DATABASE"))->getOrElse("none"));
 
 /** Database username */
-define( 'DB_USER', 'db_user' );
+define('DB_USER', Option::create(getenv("MYSQL_USER"))->getOrElse("none"));
 
 /** Database password */
-define( 'DB_PASSWORD', 'db_pwd' );
+define('DB_PASSWORD', Option::create(getenv("MYSQL_PASSWORD"))->getOrElse("none"));
 
 /** Database hostname */
-define( 'DB_HOST', 'mysql' );
+define('DB_HOST', Option::create(getenv("MYSQL_HOST"))->getOrElse("mysql"));
 
 /** Database charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8mb4' );
+define('DB_CHARSET', Option::create(getenv("MYSQL_CHARSET"))->getOrElse("utf8mb4"));
 
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
@@ -82,8 +84,10 @@ $table_prefix = 'wp_';
 define( 'WP_DEBUG', false );
 
 /* Add any custom values between this line and the "stop editing" line. */
-
-
+define(
+    "WP_SITEURL",
+    Option::create(getenv("WP_SITEURL"))->getOrElse("http://localhost:9090")
+);
 
 /* That's all, stop editing! Happy publishing. */
 

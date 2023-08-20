@@ -1,69 +1,65 @@
 version: "2.4"
 
 services:
-    php:
-        build:
-            context: .
-            dockerfile: infrastructure/images/php/Dockerfile
-            args:
-                - HOST_UID=${HOST_UID:-1000}
-                - HOST_GID=${HOST_GID:-1000}
-        restart: unless-stopped
-        environment:
-            - WP_SITEURL=${WP_SITEURL}
-            - MYSQL_DATABASE=${MYSQL_DATABASE}
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-            - MYSQL_HOST=${MYSQL_HOST:-mysql}
-        volumes:
-            - ./infrastructure/conf/php/php-fpm.d:/usr/local/etc/php-fpm.d
-            - ./infrastructure/conf/php/php-fpm.conf:/usr/local/etc/php-fpm.conf
-            - ./infrastructure/data/uploads:/var/www/mysite.com/apps/wordpress/wp-content/uploads
-            - .:/var/www/mysite.com
+  php:
+    build:
+      context: .
+      dockerfile: infrastructure/images/php/Dockerfile
+      args:
+        - HOST_UID=${HOST_UID:-1000}
+        - HOST_GID=${HOST_GID:-1000}
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./infrastructure/conf/php/php-fpm.d:/usr/local/etc/php-fpm.d
+      - ./infrastructure/conf/php/php-fpm.conf:/usr/local/etc/php-fpm.conf
+      - ./infrastructure/data/uploads:/var/www/mysite.com/apps/wordpress/wp-content/uploads
+      - .:/var/www/mysite.com
 
-    nginx:
-        build:
-            context: .
-            dockerfile: infrastructure/images/nginx/Dockerfile
-            args:
-                - HOST_UID=${HOST_UID:-1000}
-                - HOST_GID=${HOST_GID:-1000}
-        restart: unless-stopped
-        ports:
-            - "80:80"
-        volumes:
-            - ./infrastructure/conf/nginx/conf:/etc/nginx/conf.d
-            - ./infrastructure/conf/nginx/nginx.conf:/etc/nginx/nginx.conf
-            - ./infrastructure/data/uploads:/var/www/mysite.com/apps/wordpress/wp-content/uploads
-            - .:/var/www/mysite.com
-        depends_on:
-            - php
-            - mysql
+  nginx:
+    build:
+      context: .
+      dockerfile: infrastructure/images/nginx/Dockerfile
+      args:
+        - HOST_UID=${HOST_UID:-1000}
+        - HOST_GID=${HOST_GID:-1000}
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./infrastructure/conf/nginx/conf:/etc/nginx/conf.d
+      - ./infrastructure/conf/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./infrastructure/data/uploads:/var/www/mysite.com/apps/wordpress/wp-content/uploads
+      - .:/var/www/mysite.com
+    depends_on:
+      - php
+      - mysql
 
-    mysql:
-        image: mysql:8-debian
-        restart: unless-stopped
-        environment:
-            - MYSQL_DATABASE=${MYSQL_DATABASE}
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PWD}
-        ports:
-            - "12056:3306"
-        volumes:
-            - ./infrastructure/conf/mysql/conf.d:/etc/mysql/conf.d
-            - ./infrastructure/conf/mysql/my.cnf:/etc/mysql/my.cnf
-            - ./infrastructure/migrations:/docker-entrypoint-initdb.d
-            - ./infrastructure/data/mysql:/var/lib/mysql
+  mysql:
+    image: mysql:8-debian
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PWD}
+    ports:
+      - "12056:3306"
+    volumes:
+      - ./infrastructure/conf/mysql/conf.d:/etc/mysql/conf.d
+      - ./infrastructure/conf/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./infrastructure/migrations:/docker-entrypoint-initdb.d
+      - ./infrastructure/data/mysql:/var/lib/mysql
 
-    grafana:
-        image: grafana/grafana:10.0.1-ubuntu
-        restart: unless-stopped
-        ports:
-            - "3000:3000"
-        volumes:
-            - ./infrastructure/conf/grafana/defaults.ini:/usr/share/grafana/conf/defaults.ini
-            - grafana_data:/var/lib/grafana
+  grafana:
+    image: grafana/grafana:10.0.1-ubuntu
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./infrastructure/conf/grafana/defaults.ini:/usr/share/grafana/conf/defaults.ini
+      - grafana_data:/var/lib/grafana
 
 volumes:
-    grafana_data: {}
+  grafana_data: { }
