@@ -20,7 +20,9 @@
     "format": "php-cs-fixer --rules=@PSR12 --verbose fix src && php-cs-fixer --rules=@PSR12 --verbose fix tests"
   },
   "require": {
-    "php": "^8.2"
+    "php": "^8.2",
+    "vlucas/phpdotenv": "^5.5",
+    "maarky/option": "^3.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^10",
