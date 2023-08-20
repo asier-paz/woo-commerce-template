@@ -7,6 +7,11 @@
  */
 
 require_once __DIR__ . "/../../../vendor/autoload.php";
+
+// Load Dotenv globally
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
+
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';
 
