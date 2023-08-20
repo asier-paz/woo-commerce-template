@@ -1,17 +1,30 @@
 {
-    "name": "asierpaz/woo-commerce-template",
-    "description": "Template project for a Wordpress with Woo Commerce to avoid all the boilerplate when starting an e-commerce",
-    "type": "project",
-    "autoload": {
-        "psr-4": {
-            "MySite\\": "src/",
-            "MySite\\Apps\\Wordpress\\": "apps/wordpress/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Asier Paz"
-        }
-    ],
-    "require": {}
+  "name": "asierpaz/woo-commerce-template",
+  "description": "Template project for a Wordpress with Woo Commerce to avoid all the boilerplate when starting an e-commerce",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "MySite\\": "src/",
+      "Tests\\MySite\\": "tests/",
+      "MySite\\Apps\\Wordpress\\": "apps/wordpress/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Asier Paz"
+    }
+  ],
+  "scripts": {
+    "static": "phpstan analyse --level max src tests",
+    "test": "phpunit tests",
+    "format": "php-cs-fixer --rules=@PSR12 --verbose fix src && php-cs-fixer --rules=@PSR12 --verbose fix tests"
+  },
+  "require": {
+    "php": "^8.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10",
+    "phpstan/phpstan": "^1.10",
+    "friendsofphp/php-cs-fixer": "^3.23"
+  }
 }

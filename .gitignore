@@ -15,5 +15,9 @@ vendor/
 # Node modules
 node_modules/
 
+# .cache files
+# from PHP-CS-Fixer and PHPUnit for example
+*.cache
+
 # dotenv files
 .env
