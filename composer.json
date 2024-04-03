@@ -5,8 +5,12 @@
   "autoload": {
     "psr-4": {
       "MySite\\": "src/",
-      "Tests\\MySite\\": "tests/",
       "MySite\\Apps\\Wordpress\\": "apps/wordpress/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\MySite\\": "tests/"
     }
   },
   "authors": [
