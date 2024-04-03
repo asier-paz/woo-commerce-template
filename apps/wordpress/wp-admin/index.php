@@ -6,12 +6,6 @@
  * @subpackage Administration
  */
 
-require_once __DIR__ . "/../../../vendor/autoload.php";
-
-// Load Dotenv globally
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->safeLoad();
-
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';
 
@@ -160,20 +154,21 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 
 		// Only show the dashboard notice if it's been less than a minute since the message was postponed.
 		if ( $time_passed < MINUTE_IN_SECONDS ) :
-			?>
-		<div class="notice notice-success is-dismissible">
-			<p>
-				<?php
-				printf(
-					/* translators: %s: Human-readable time interval. */
-					__( 'The admin email verification page will reappear after %s.' ),
-					human_time_diff( time() + $remind_interval )
-				);
-				?>
-			</p>
-		</div>
-		<?php endif; ?>
-	<?php endif; ?>
+			$message = sprintf(
+				/* translators: %s: Human-readable time interval. */
+				__( 'The admin email verification page will reappear after %s.' ),
+				human_time_diff( time() + $remind_interval )
+			);
+			wp_admin_notice(
+				$message,
+				array(
+					'type'        => 'success',
+					'dismissible' => true,
+				)
+			);
+		endif;
+	endif;
+	?>
 
 <?php
 if ( has_action( 'welcome_panel' ) && current_user_can( 'edit_theme_options' ) ) :

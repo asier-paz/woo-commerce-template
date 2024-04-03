@@ -18,23 +18,21 @@
  * @package WordPress
  */
 
-use maarky\Option\Type\String\Option;
-
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', Option::create(getenv("MYSQL_DATABASE"))->getOrElse("none"));
+define( 'DB_NAME', 'database_name_here' );
 
 /** Database username */
-define('DB_USER', Option::create(getenv("MYSQL_USER"))->getOrElse("none"));
+define( 'DB_USER', 'username_here' );
 
 /** Database password */
-define('DB_PASSWORD', Option::create(getenv("MYSQL_PASSWORD"))->getOrElse("none"));
+define( 'DB_PASSWORD', 'password_here' );
 
 /** Database hostname */
-define('DB_HOST', Option::create(getenv("MYSQL_HOST"))->getOrElse("mysql"));
+define( 'DB_HOST', 'localhost' );
 
 /** Database charset to use in creating database tables. */
-define('DB_CHARSET', Option::create(getenv("MYSQL_CHARSET"))->getOrElse("utf8mb4"));
+define( 'DB_CHARSET', 'utf8' );
 
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
@@ -50,14 +48,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         '-SkYK#AZ$5C_ P,4K`0LBSMrVI_e*xOGUO&UkguhP#Xm]i,=ga@.~e 5cJXF&r`Q' );
-define( 'SECURE_AUTH_KEY',  'he@A>h=qR$f ?6cE%#k.#<7lBdV[~q1Lfl* jVxxfdSoU#:3fMrcRwT/xAtGATh8' );
-define( 'LOGGED_IN_KEY',    'Wd#5pgk2pr8]]p4ju&dHr*P.4s_jo|x{^7S=,@ >6Z5CA7gl|Z>G,#za~gcl>q<h' );
-define( 'NONCE_KEY',        'B*Tp()}0y(gZI)dNn+MY/56gc@ISv!te.NvGb9].d>b0PQ^-H*}Q<SE:|E3q;gOX' );
-define( 'AUTH_SALT',        ' ]=|Fbsx)/aX3zAw8bRO/D)PrXjg!-%W.Pid~_W2hS>pawk>?_q93rSB0rhNb>nT' );
-define( 'SECURE_AUTH_SALT', '8u{x!=.z=`0!rJ76<jP59zeSVDWJ.bOdfhK010AT$6&qlH|;I.t|~:-}(goKYfO)' );
-define( 'LOGGED_IN_SALT',   '1hi`~R6J2F)c;:VkO^k&#p&mblI_+D=.R@6`3`lbK/H[($tUt&*9)!T2X:`!7Ft1' );
-define( 'NONCE_SALT',       'Y(b)x>B,m08_P8TtFM9,|mlxc^B;{i>O3D[f,ia+O{;Oe=H|g5]AtVN_;Pb^V1Jc' );
+define( 'AUTH_KEY',         'put your unique phrase here' );
+define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
+define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
+define( 'NONCE_KEY',        'put your unique phrase here' );
+define( 'AUTH_SALT',        'put your unique phrase here' );
+define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
+define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
+define( 'NONCE_SALT',       'put your unique phrase here' );
 
 /**#@-*/
 
@@ -84,10 +82,8 @@ $table_prefix = 'wp_';
 define( 'WP_DEBUG', false );
 
 /* Add any custom values between this line and the "stop editing" line. */
-define(
-    "WP_SITEURL",
-    Option::create(getenv("WP_SITEURL"))->getOrElse("http://localhost:9090")
-);
+
+
 
 /* That's all, stop editing! Happy publishing. */
 
