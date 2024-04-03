@@ -1,10 +1,16 @@
 version: "2.4"
 
 services:
-    nginx:
-        ports:
-            - "9090:80"
+  php:
+    volumes:
+      - .:/var/www/app
 
-    mysql:
-        ports:
-            - "3306:3306"
+  nginx:
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/app
+
+  mysql:
+    ports:
+      - "3306:3306"

@@ -1,0 +1,5 @@
+[mysqld]
+# The error log is saved into the below file. To send the error log to the stderr, comment
+# the line below or just rename this file to "error_log.cnf.disabled" or something that
+# does not end in ".cnf"
+log_error = /var/log/app/mysqld/error.log

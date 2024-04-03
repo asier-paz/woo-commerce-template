@@ -1,0 +1,50 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: grafana
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: grafana
+          __path__: /var/log/app/grafana/**/*.log
+
+  - job_name: mysqld
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: mysqld
+          __path__: /var/log/app/mysqld/**/*.log
+
+  - job_name: nginx
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx
+          __path__: /var/log/app/nginx/**/*.log
+
+  - job_name: php-fpm
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: php-fpm
+          __path__: /var/log/app/php-fpm/**/*.log
+
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: prometheus
+          __path__: /var/log/app/prometheus/**/*.log

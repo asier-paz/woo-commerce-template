@@ -24,6 +24,3 @@ RUN apt-get update && apt-get install -y \
 # Install composer globally
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-
-# Make the given UID the default user
-USER "$HOST_UID:$HOST_GID"
